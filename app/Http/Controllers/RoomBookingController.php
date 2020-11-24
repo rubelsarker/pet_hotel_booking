@@ -32,10 +32,10 @@ class RoomBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createBooking($id,$from,$to)
+    public function createBooking($id)
     {
         $room = Room::findOrFail($id);
-        return view('room_booking.create',compact('room','from','to'));
+        return view('room_booking.create',compact('room'));
     }
 
     /**

@@ -1,100 +1,136 @@
 @extends('layouts.app')
+@section('styles')
+    <style>
+        .carousel{
+            position: relative;
+        }
+        .search-form{
+            position: absolute;
+            top: 100px;
+            left: 0px;
+            width: 100%;
+        }
+        .about-title{
+            font-size: 34px;
+            font-weight: 700;
+            color: #18ad50;
+            margin: 0;
+            margin-bottom: 30px;
+        }
+        .image{
+            height: 450px;
+            width: 400px;
+        }
+
+
+    </style>
+
+@endsection
 @section('content')
-    <div class="section section-flat-search container container-palette bg-mask">
-        <div class="container">
-            <div class="body">
-                <div class="job-form">
-                    <form method="POST" action="{{route('search.room')}}" class="flex-row">
-                        @csrf
-                        <div class="form-group">
-                            <label for="from" class="control-label text-color-secondary">Check In</label>
-                            <input name="from" id="from" type="date" class="form-control" placeholder="Check In" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="to" class="control-label text-color-secondary">Check Out</label>
-                            <input name="to" id="to" type="date" class="form-control" placeholder="Check Out" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="pets" class="control-label text-color-secondary">Pets</label>
-                            <input name="pets" id="pets" type="number" class="form-control" placeholder="Pets" required />
-                        </div>
-                        <button type="submit" class="btn btn-flat-search">Search</button>
-                    </form>
-                </div>
-            </div> <!-- ./ top search body -->
-        </div>
-    </div> <!-- ./ top search -->
-    <div class="section section-listings-wide container container-palette">
-        <div class="container">
-            <h2 class="section-title">Recent Jobs</h2><!-- ./ section title -->
-            <div class="column-content">
-                <div class="results-list middle m0">
-                    <div class="item">
-                        <div class="flex-row">
-                            <div class="grid-content">
-                                <h3 class="title text-color-secondary"><a href="09_Job_Open.html">Graphic Designer</a></h3>
-                                <div class="options">
-                                    <span class="opt">Bankable Payments</span>
-                                    <span class="option opt-price"><i class="icon_currency"></i>$25 an hour</span>
-                                    <span class="opt-light"><i class="icon_pin_alt"></i>Los Angeles, CA</span>
+    <!--slider-->
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="{{url('')}}/assets/img/slider/puppy-1082141_1920.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100"  src="{{url('')}}/assets/img/slider/bulldog-1047518_1920.jpg" alt="Second slide">
+
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100"  src="{{url('')}}/assets/img/slider/puppy-3982865_1920.jpg" alt="Third slide">
+            </div>
+            <div class="search-form">
+                <div class="widget-mapsearch container container-palette">
+                    <div class="container">
+                        <div class="search-overflow">
+                            <form method="GET" action="{{route('search.room')}}" class="flex-row job-form">
+                                <div class="form-group col-md-3">
+                                    <label for="from" class="control-label text-white">Check In</label>
+                                    <input value="{{isset($_GET['from']) ? $_GET['from'] : ''}}" name="from" id="from" type="date" class="form-control" placeholder="Check In" required />
                                 </div>
-                            </div>
-                            <div class="grid"><span class="item-label text-red"><i class="icon_ribbon_alt"></i>Full Time</span></div>
-                            <div class="grid-side">
-                                <a href="12_Submit_Resume.html" class="btn btn-custom btn-custom-secondary">Apply</a>
-                            </div>
-                        </div>
-                    </div><!-- ./ job purpose -->
-                    <div class="item">
-                        <div class="flex-row">
-                            <div class="grid-content">
-                                <h3 class="title text-color-secondary"><a href="09_Job_Open.html">Analyst, Trade Marketing</a></h3>
-                                <div class="options">
-                                    <span class="opt">Trade in NY</span>
-                                    <span class="option opt-price"><i class="icon_currency"></i>$70 an hour</span>
-                                    <span class="opt-light"><i class="icon_pin_alt"></i>Torrance, CA</span>
+                                <div class="form-group clo-md-3">
+                                    <label for="to" class="control-label text-white">Check Out</label>
+                                    <input value="{{isset($_GET['to']) ? $_GET['to'] : ''}}" name="to" id="to" type="date" class="form-control" placeholder="Check Out" required />
                                 </div>
-                            </div>
-                            <div class="grid"><span class="item-label text-yellow"><i class="icon_ribbon_alt"></i>Part Time</span></div>
-                            <div class="grid-side">
-                                <a href="12_Submit_Resume.html" class="btn btn-custom btn-custom-secondary">Apply</a>
-                            </div>
-                        </div>
-                    </div><!-- ./ job purpose -->
-                    <div class="item">
-                        <div class="flex-row">
-                            <div class="grid-content">
-                                <h3 class="title text-color-secondary"><a href="09_Job_Open.html">Licensed Real Estate Sales Agent</a></h3>
-                                <div class="options">
-                                    <span class="opt">Douglas Eliman</span>
-                                    <span class="option opt-price"><i class="icon_currency"></i>$75,900 a year</span>
-                                    <span class="opt-light"><i class="icon_pin_alt"></i>Los Angeles, CA</span>
+                                <div class="form-group col-md-2">
+                                    <label for="cats" class="control-label text-white">Cats</label>
+                                    <input  value="{{isset($_GET['cats']) ? $_GET['cats'] : ''}}" name="cats" id="cats" type="number" class="form-control" placeholder="Cats"  />
                                 </div>
-                            </div>
-                            <div class="grid"><span class="item-label text-purple"><i class="icon_ribbon_alt"></i>Freelance</span></div>
-                            <div class="grid-side">
-                                <a href="12_Submit_Resume.html" class="btn btn-custom btn-custom-secondary">Apply</a>
-                            </div>
-                        </div>
-                    </div><!-- ./ job purpose -->
-                    <div class="item">
-                        <div class="flex-row">
-                            <div class="grid-content">
-                                <h3 class="title text-color-secondary"><a href="09_Job_Open.html">Project Manager</a></h3>
-                                <div class="options">
-                                    <span class="opt">Netflix</span>
-                                    <span class="option opt-price"><i class="icon_currency"></i>$40 an hour</span>
-                                    <span class="opt-light"><i class="icon_pin_alt"></i>Arco-Plaza, CA</span>
+                                <div class="form-group col-md-2">
+                                    <label for="dogs" class="control-label text-white">Dogs</label>
+                                    <input  value="{{isset($_GET['dogs']) ? $_GET['dogs'] : ''}}" name="dogs" id="dogs" type="number" class="form-control" placeholder="Dogs"  />
                                 </div>
-                            </div>
-                            <div class="grid"><span class="item-label text-red"><i class="icon_ribbon_alt"></i>Full Time</span></div>
-                            <div class="grid-side">
-                                <a href="12_Submit_Resume.html" class="btn btn-custom btn-custom-secondary">Apply</a>
-                            </div>
+                                <div class="form-group-btn">
+                                    <button style="margin-top: 30px;" type="submit" class="btn btn-flat-search">Search</button>
+                                </div>
+                            </form>
                         </div>
-                    </div><!-- ./ job purpose -->
-                </div><!-- ./ jobs list -->
+                    </div>
+                </div><!-- ./ search with map -->
             </div>
         </div>
-    </div><!-- ./ jobs listigns -->
+    </div>
+    <!--end slider-->
+    <!--about-->
+    <main class="container container-palette pt-75 m60">
+        <div class="container">
+            <div class="wraper-row">
+                <div class="column-content">
+                    <div class="widget widget-rsm no-border no-padding">
+                        <div class="rsm-box">
+                            <h2 class="about-title text-center">About Pet Hotel</h2>
+                            <div class="decription text-justify">
+                                Etiam consectetur semper tincidunt. Praesent luctus erat elit, at vulputate ex vehicula eget. Vestibulum sit amet velit at sapien placerat maximus sed id magna. Sed pretium rhoncus lacus nec suscipit. Praesent nec gravida dui. Aenean auris sem, dapibus id tempor a, ullamcorper ut urna. Vivamus congue est quis ex rhoncus, ac imperdiet felis molestie. Nulla tincidunt turpis felis, id elementum mi posuere vel. Pellentesque tempus, eros suscipit laoreet suscip. Mauris a nunc rhoncus, cursus sapien ut, congue mi.
+                            </div>
+                            <div class="text-center">
+                                <a href="{{route('about')}}" class=" btn btn-custom btn-custom-primary text-white">Read More</a>
+                            </div>
+
+                        </div>
+                    </div> <!-- ./ widget profile -->
+                </div> <!-- ./ content -->
+
+            </div>
+        </div>
+    </main>
+    <!--end about-->
+    <main class="container container-palette " style="background-color: #edeff1">
+        <div class="container ">
+            <div class="wraper-row ">
+                <div class="column-sidebar mt-5">
+                    <div class="image">
+                        <img src="{{url('')}}/assets/img/slider/puppy-1207816_1920.jpg" class="img-fluid">
+                    </div>
+                </div><!-- ./ sidebar -->
+                <div class="column-content results-listings-ext first-nopadding m65 mt-5">
+                    <div class="item-listings-ext">
+                        <div class="header">
+                            <div class="content">
+                                <div class="caption">
+                                    <h3 class="title text-center about-title">Share a Room</h3>
+                                    <p class="text-justify mt-2">Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+                                        used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter
+                                        in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum
+                                        for use in a type specimen book. It usually begins with:</p>
+                                    <div class="text-center">
+                                        <a href="{{route('room.list')}}" class=" btn btn-custom btn-custom-primary text-white">BOOK A ROOM</a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div><!-- ./ results big -->
+            </div>
+        </div>
+    </main>
+@endsection
+@section('scripts')
+ <script>
+     $('.carousel').carousel({
+         interval: 2000
+     })
+ </script>
 @endsection

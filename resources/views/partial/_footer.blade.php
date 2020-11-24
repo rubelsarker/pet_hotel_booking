@@ -4,19 +4,19 @@
             <div class="row row-flex">
                 <div class="col-md-3">
                     <div class="f_widget widget-about">
-                        <h2 class="title">Abut Jobworld</h2><!-- ./ widget title -->
+                        <h2 class="title">About</h2><!-- ./ widget title -->
                         <div class="body">Aliquam sed est in lorem luctus hendrit. Nulla in posuere neque. Nam lectus risus, pellentesque at nulla vitae, mauris raesent pulvinar.</div><!-- ./ widget body -->
                     </div><!-- ./ widget about -->
                 </div>
                 <div class="col-md-3">
                     <div class="f_widget widget-navigation">
-                        <h2 class="title">For Job Seekers</h2><!-- ./ widget title -->
+                        <h2 class="title">Quick Links</h2><!-- ./ widget title -->
                         <div class="body">
                             <ul class="list-f-nav">
-                                <li><a href="07_Jobs_Search.html"><i class="arrow_carrot-right_alt2"></i>Find Jobs</a></li>
-                                <li><a href="12_Submit_Resume.html"><i class="arrow_carrot-right_alt2"></i>Submit Resume</a></li>
-                                <li><a href="13_Saved.html"><i class="arrow_carrot-right_alt2"></i>Saved Jobs</a></li>
-                                <li><a href="20_Contact.html"><i class="arrow_carrot-right_alt2"></i>Help</a></li>
+                                <li><a href="#"><i class="arrow_carrot-right_alt2"></i>About Us</a></li>
+                                <li><a href="#"><i class="arrow_carrot-right_alt2"></i>Contact Us</a></li>
+                                <li><a href="#"><i class="arrow_carrot-right_alt2"></i>Our Rooms</a></li>
+                                <li><a href="#"><i class="arrow_carrot-right_alt2"></i>Help</a></li>
                             </ul>
                         </div><!-- ./ widget body -->
                     </div>
@@ -50,7 +50,7 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="flex-row">
-                <div class="right"><span class="copyright">Copyright © 2017 - Jobworld</span></div><!-- ./ copyright -->
+                <div class="right"><span class="copyright">Copyright © 2017 - Pet Hotel Booking</span></div><!-- ./ copyright -->
                 <div class="left">
                     <ul class="list-social">
                         <li><a href="#"><i class="social_instagram"></i></a></li>

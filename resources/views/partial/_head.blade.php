@@ -1,5 +1,5 @@
 <meta charset="UTF-8" />
-<title>Search with results</title>
+<title>Pet Hotel</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link rel="shortcut icon" href="{{url('')}}/assets/img/favicon.png" type="image/png" />
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700%7CMontserrat:300,400,500,600,700,800" rel="stylesheet" />
@@ -23,3 +23,9 @@
 <link rel="stylesheet" href="{{url('')}}/assets/css/custom.css" />
 <!-- End custom styles  -->
 @yield('styles')
+<style>
+    li.nav-item.dropdown.active {
+        background-color: #18AD50;
+        color: #ffffff;
+    }
+</style>

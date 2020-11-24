@@ -17,15 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 //password change
-Route::get('password-change','Auth\ChangedPasswordController@edit')->name('password.edit');
-Route::put('password-change','Auth\ChangedPasswordController@updatepassword')->name('manual.password.update');
+Route::get('password-change','Auth\ChangedPasswordController@edit')->name('password.edit')->middleware('verified');
+Route::put('password-change','Auth\ChangedPasswordController@updatepassword')->name('manual.password.update')->middleware('verified');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 
-Route::group(['middleware' => ['auth','role:Admin']], function() {
+Route::group(['middleware' => ['auth','role:Admin','verified']], function() {
     Route::resource('roles','RoleController');
     Route::resource('users','UserController');
     Route::resource('room-category','CategoryController')->except('destroy');
@@ -42,18 +42,19 @@ Route::group(['middleware' => ['auth','role:Admin']], function() {
     Route::get('task-report','TaskCompleteController@allReport')->name('task-report');
 
 });
+Route::get('contact','FrontendController@contact')->name('contact');
+Route::get('about','FrontendController@about')->name('about');
 Route::get('room-list','FrontendController@roomList')->name('room.list');
 Route::get('room-details/{id}','FrontendController@roomDetails')->name('room-details');
-Route::group(['middleware' => ['auth','role:Customer' || 'role:Admin']], function() {
+Route::group(['middleware' => ['auth','verified']], function() {
     Route::resource('room-booking','RoomBookingController')->except(['destroy','create']);
-    Route::get('add/room-booking/{id}/{from}/{to}','RoomBookingController@createBooking')->name('add.booking');
+    Route::get('add/room-booking/{id}','RoomBookingController@createBooking')->name('add.booking');
     Route::post('payment','RoomBookingController@payment')->name('make.payment');
     Route::get('room-booking/{id}/delete','RoomBookingController@destroy')->name('room-booking.destroy');
-    Route::get('available/room','FrontendController@searchRoomView')->name('search.room.view');
 });
-Route::post('search-room','FrontendController@searchRoom')->name('search.room');
+Route::get('search-room','FrontendController@searchRoom')->name('search.room');
 
-Route::group(['middleware' => ['auth','role:Employee']], function() {
+Route::group(['middleware' => ['auth','role:Employee','verified']], function() {
     Route::get('task-complete','TaskCompleteController@index')->name('task-complete.index');
     Route::get('task-complete/done/{id}','TaskCompleteController@Update')->name('task-complete.done');
 });

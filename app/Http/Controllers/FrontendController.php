@@ -16,20 +16,23 @@ class FrontendController extends Controller
         $row = Room::findOrFail($id);
         return view('pages.room_details',compact('row'));
     }
-    public function searchRoom(Request $request){
-        $request->validate([
-            'from'     => 'required',
-            'to'      => 'required',
-            'pets'      => 'required'
-        ]);
-        $from = $request->from;
-        $to = $request->to;
-        $rooms = Room::where('no_of_bed','>=', $request->pets)->whereHas('booking',function ($query) use ($from){
+    public function searchRoom(){
+        $from = isset($_GET['from']) ? $_GET['from'] : null;
+        $to = isset($_GET['to']) ? $_GET['to'] : null;
+        $cats = isset($_GET['cats']) ? $_GET['cats'] : null;
+        $dogs = isset($_GET['dogs']) ? $_GET['dogs'] : null;
+        $rooms = Room::where('cats','>=', $cats)->where('dogs','>=', $dogs)->whereHas('booking',function ($query) use ($from){
             $query->whereDate('to','<',$from);
         })->get();
         return view('pages.room_list',compact('rooms','from','to'));
     }
     public function searchRoomView(){
         return view('pages.search_room');
+    }
+    public function about(){
+        return  view('pages.about');
+    }
+    public function contact(){
+        return  view('pages.contact');
     }
 }

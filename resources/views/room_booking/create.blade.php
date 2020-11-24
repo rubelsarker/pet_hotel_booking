@@ -47,12 +47,12 @@
                                         <span class="badge badge-secondary badge-pill">{{$room->no_of_bed}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Max Adults
-                                        <span class="badge badge-secondary badge-pill">{{$room->max_adult}}</span>
+                                       Cats
+                                        <span class="badge badge-secondary badge-pill">{{$room->cats}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Max Childs
-                                        <span class="badge badge-secondary badge-pill">{{$room->max_child}}</span>
+                                        Dogs
+                                        <span class="badge badge-secondary badge-pill">{{$room->dogs}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         Facility
@@ -70,13 +70,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="from">From Date</label>
-                                        <input readonly value="{{$from}}" type="date" placeholder="From Date" name="from" id="from" class="form-control" required>
+                                        <input  value="{{isset($_GET['from']) ? $_GET['from'] : ''}}"  type="date" placeholder="From Date" name="from" id="from" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="to">To Date</label>
-                                        <input readonly value="{{$to}}" type="date" placeholder="To Date" name="to" id="to" class="form-control" required>
+                                        <input  value="{{isset($_GET['to']) ? $_GET['to'] : ''}}"  type="date" placeholder="To Date" name="to" id="to" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

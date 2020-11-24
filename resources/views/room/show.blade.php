@@ -36,12 +36,12 @@
                                        <span class="badge badge-secondary badge-pill">{{$row->no_of_bed}}</span>
                                    </li>
                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                       Max Adults
-                                       <span class="badge badge-secondary badge-pill">{{$row->max_adult}}</span>
+                                      Cats
+                                       <span class="badge badge-secondary badge-pill">{{$row->cats}}</span>
                                    </li>
                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                       Max Childs
-                                       <span class="badge badge-secondary badge-pill">{{$row->max_child}}</span>
+                                       Dogs
+                                       <span class="badge badge-secondary badge-pill">{{$row->dogs}}</span>
                                    </li>
                                    <li class="list-group-item d-flex justify-content-between align-items-center">
                                        Facility

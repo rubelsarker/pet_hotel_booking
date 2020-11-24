@@ -48,8 +48,8 @@ class RoomController extends Controller
             'type'      => 'required',
             'name'      => 'required',
             'no_of_bed' => 'required',
-            'max_adult' => 'required',
-            'max_child' => 'required',
+            'cats'      => 'required',
+            'dogs'      => 'required',
             'fare'      => 'required'
         ]);
         $image = $request->image;
@@ -72,8 +72,8 @@ class RoomController extends Controller
             'title'         => $request->title,
             'name'          => $request->name,
             'no_of_bed'     => $request->no_of_bed,
-            'max_adult'     => $request->max_adult,
-            'max_child'     => $request->max_child,
+            'cats'          => $request->cats,
+            'dogs'          => $request->dogs,
             'fare'          => $request->fare,
             'desc'          => $request->desc,
             'image'         => $image_url
@@ -127,8 +127,8 @@ class RoomController extends Controller
             'type'      => 'required',
             'name'      => 'required',
             'no_of_bed' => 'required',
-            'max_adult' => 'required',
-            'max_child' => 'required',
+            'cats' => 'required',
+            'dogs' => 'required',
             'fare'      => 'required'
         ]);
         $row = Room::findOrFail($id);
@@ -155,8 +155,8 @@ class RoomController extends Controller
             'title'         => $request->title,
             'name'          => $request->name,
             'no_of_bed'     => $request->no_of_bed,
-            'max_adult'     => $request->max_adult,
-            'max_child'     => $request->max_child,
+            'cats'          =>   $request->cats,
+            'dogs'          => $request->dogs,
             'fare'          => $request->fare,
             'desc'          => $request->desc,
             'image'         => $image_url

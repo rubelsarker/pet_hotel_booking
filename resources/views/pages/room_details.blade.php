@@ -13,6 +13,7 @@
             <div class="col-md-12">
                 <div class="card my-4 p-4">
                     <div class="card-title">
+                        <a href="{{route('add.booking',$row->id)}}?from={{isset($_GET['from'])?$_GET['from']:null}}&to={{isset($_GET['to'])?$_GET['to']:null}}" class="btn btn-sm btn-secondary float-right mx-1">Book Room</a>
                         <a class="btn btn-primary float-right" href="{{ route('room.list') }}"> Back</a>
                     </div>
                     <div class="card-body">

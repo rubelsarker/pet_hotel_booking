@@ -19,24 +19,22 @@
                                 <i class="icon_close_alt2"></i>
                             </button>
                             <ul class="nav navbar-nav collapse navbar-collapse default-menu"  id="navbarNavDropdown">
-                                <li class="nav-item dropdown active">
+                                <li class="nav-item dropdown ">
                                     <a href="{{url('/')}}" class="btn btn-clear">Home</a>
                                 </li>
-                                <li class="nav-item dropdown active">
+                                <li class="nav-item dropdown ">
                                     <a href="{{route('room.list')}}" class="btn btn-clear">Room List</a>
                                 </li>
-                                <li class="nav-item dropdown active">
-                                    <a href="{{route('search.room.view')}}" class="btn btn-clear">Search Room</a>
-                                </li>
+
                                 @guest
                                 @else
                                     @role('Customer')
-                                    <li class="nav-item dropdown active">
+                                    <li class="nav-item dropdown ">
                                         <a href="{{route('room-booking.index')}}" class="btn btn-clear">My Booking</a>
                                     </li>
                                     @endrole
                                     @role('Employee')
-                                        <li class="nav-item dropdown active">
+                                        <li class="nav-item dropdown ">
                                             <a href="{{route('task-complete.index')}}" class="btn btn-clear">Task</a>
                                         </li>
                                     @endrole
@@ -57,11 +55,11 @@
                                     </li>
                                     @endrole
                                 @endguest
-                                <li class="nav-item dropdown active">
-                                    <a href="#" class="btn btn-clear">About</a>
+                                <li class="nav-item dropdown  ">
+                                    <a href="{{route('about')}}" class="btn btn-clear">About</a>
                                 </li>
-                                <li class="nav-item dropdown active">
-                                    <a href="#" class="btn btn-clear">Contact Us</a>
+                                <li class="nav-item dropdown ">
+                                    <a href="{{route('contact')}}" class="btn btn-clear">Contact Us</a>
                                 </li>
                                 @guest
                                     <li class="nav-item">

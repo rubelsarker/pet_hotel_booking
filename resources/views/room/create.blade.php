@@ -62,14 +62,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="max_adult">Max Adults </label>
-                                        <input type="number" placeholder="Max Adults" name="max_adult" id="max_adult" class="form-control" required>
+                                        <label for="cats">No of Cats</label>
+                                        <input type="number" placeholder="No of Cats" name="cats" id="cats" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="max_child">Max Childs </label>
-                                        <input type="number" placeholder="Max Childs" name="max_child" id="max_child" class="form-control" required>
+                                        <label for="dogs">No of Dogs</label>
+                                        <input type="number" placeholder="No of Dogs" name="dogs" id="dogs" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
