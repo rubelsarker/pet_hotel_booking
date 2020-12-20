@@ -3,7 +3,7 @@
     <div class="section banner bg-color-primary container container-palette">
         <div class="container banner-container">
             <div class="banner-body text-center">
-                <h2 class="title">Our Luxaries Room</h2><!-- ./ banner body -->
+                <h2 class="title">Our luxurious Room</h2><!-- ./ banner body -->
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                     </div><!-- ./ search with map -->
                 </div>
             </div>
-            @if(isset($_GET['from']) && isset($_GET['to']))
+{{--            @if(isset($_GET['from']) && isset($_GET['to']))--}}
                 @foreach($rooms as $room)
                 <div class="col-md-12 my-1">
                     <div class="card">
@@ -81,12 +81,15 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
-                @else
-                <div class="">
-                    <h2>Please select a date first</h2>
+                @endforeach
+                <div class="py-2">
+                    {{ $rooms->links() }}
                 </div>
-            @endif
+                {{--@else--}}
+                {{--<div class="">--}}
+                    {{--<h2>Please select a date first</h2>--}}
+                {{--</div>--}}
+            {{--@endif--}}
         </div>
     </div>
 @endsection

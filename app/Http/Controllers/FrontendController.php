@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class FrontendController extends Controller
 {
     public function roomList(){
-        $rooms = Room::all();
+        $rooms = Room::paginate(5);
         return view('pages.room_list',compact('rooms'));
     }
     public function roomDetails($id){

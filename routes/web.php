@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $rooms = \App\Model\Room::orderBy('id','desc')->take(4)->get();
+    return view('welcome',compact('rooms'));
 });
 
 Auth::routes(['verify' => true]);

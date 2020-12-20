@@ -72,8 +72,50 @@
         </div>
     </div>
     <!--end slider-->
+    <div class="section section-articles  container container-palette" style="background-color: #edeff1;">
+        <div class="container">
+            <h2 class="section-title about-title">Our Latest Rooms</h2><!-- ./ section title -->
+            <div class="row row-flex results-default">
+                @foreach($rooms as $room)
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                        <img src="{{URL::to($room->image)}}" style="width: 100%;height: auto;" alt="" />
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                   Category
+                                    <span class="badge badge-primary badge-pill">{{$room->type ? $room->type->title : ''  }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    No of Beds
+                                    <span class="badge badge-primary badge-pill">{{$room->no_of_bed}}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Fare
+                                    <span class="badge badge-primary badge-pill">{{$room->fare}}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Facility
+                                    @foreach($room->facilities as $facility)
+                                        <span class="badge badge-primary badge-pill">{{$facility->title}}</span>
+                                    @endforeach
+
+                                </li>
+                            </ul>
+                            <div class="mt-2">
+                                <a href="{{route('room-details',$room->id)}}?from={{isset($_GET['from'])?$_GET['from']:null}}&to={{isset($_GET['to'])?$_GET['to']:null}}" class="btn btn-sm btn-secondary float-right mx-1">View</a>
+                                <a href="{{route('add.booking',$room->id)}}?from={{isset($_GET['from'])?$_GET['from']:null}}&to={{isset($_GET['to'])?$_GET['to']:null}}" class="btn btn-sm btn-secondary float-right mx-1">Book Room</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div><!-- ./ articles grid -->
+        </div>
+    </div><!-- ./ section recent articles -->
+
     <!--about-->
-    <main class="container container-palette pt-75 m60">
+    <main class="container container-palette pt-75 m60" >
         <div class="container">
             <div class="wraper-row">
                 <div class="column-content">
