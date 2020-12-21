@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Room;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $rooms = Room::orderBy('id','desc')->take(4)->get();
+        return view('welcome',compact('rooms'));
     }
 }

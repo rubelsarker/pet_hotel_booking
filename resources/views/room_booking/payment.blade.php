@@ -53,7 +53,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="amount">Amount</label>
-                                        <input type="number" placeholder="Amount" name="amount" id="amount" class="form-control" required>
+                                        <input value="{{$fare}}" readonly type="number" placeholder="Amount" name="amount" id="amount" class="form-control" required>
                                     </div>
                                 </div>
                                 @foreach($data as $key =>$d)

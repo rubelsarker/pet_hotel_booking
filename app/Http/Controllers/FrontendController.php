@@ -21,9 +21,7 @@ class FrontendController extends Controller
         $to = isset($_GET['to']) ? $_GET['to'] : null;
         $cats = isset($_GET['cats']) ? $_GET['cats'] : null;
         $dogs = isset($_GET['dogs']) ? $_GET['dogs'] : null;
-        $rooms = Room::where('cats','>=', $cats)->where('dogs','>=', $dogs)->whereHas('booking',function ($query) use ($from){
-            $query->whereDate('to','<',$from);
-        })->get();
+        $rooms = Room::where('cats','>=', $cats)->where('dogs','>=', $dogs)->paginate(5);
         return view('pages.room_list',compact('rooms','from','to'));
     }
     public function searchRoomView(){

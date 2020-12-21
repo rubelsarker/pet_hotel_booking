@@ -57,7 +57,15 @@ class RoomBookingController extends Controller
             'customer_id'   => Auth::user()->id,
             'room_id'       => $request->room_id
             ];
-        return view('room_booking.payment',compact('data'));
+        //$bookRoom = BookRoom::where('room_id',$request->room_id)->get();
+
+        $now = strtotime($request->to);
+        $your_date = strtotime($request->from);
+        $datediff = $now - $your_date;
+        $day = round($datediff / (60 * 60 * 24));
+        $room = Room::findOrFail( $request->room_id);
+        $fare =  $day * $room->fare;
+        return view('room_booking.payment',compact('data','fare'));
     }
     public function payment(Request $request){
         $request->validate([
@@ -103,7 +111,8 @@ class RoomBookingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $row = BookRoom::find($id);
+        return view('room_booking.edit',compact('row'));
     }
 
     /**
@@ -115,7 +124,24 @@ class RoomBookingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $row = BookRoom::findOrFail($id);
+        $request->validate([
+            'to'          => 'required'
+        ]);
+        BookRoom::where('id',$id)->update([
+            'to' => $request->to,
+        ]);
+        $now = strtotime($request->to);
+        $your_date = strtotime($row->to);
+        $datediff = $now - $your_date;
+        $dayIncrease = round($datediff / (60 * 60 * 24));
+        $increaseFare = $row->room->fare;
+        $payment = Payment::where('booking_id',$id)->first();
+        Payment::where('booking_id',$id)->update([
+            'Amount' => ( $dayIncrease *  $increaseFare) + $payment->Amount
+        ]);
+        return redirect()->route('room-booking.index')
+            ->with('success','Booking updated  successfully');
     }
 
     /**

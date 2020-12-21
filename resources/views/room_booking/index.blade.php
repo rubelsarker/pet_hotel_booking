@@ -40,7 +40,7 @@
                                     <td>{{$row->payment->Amount}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-info" href="{{ route('room-booking.show',$row->id) }}">Show</a>
-                                        {{--<a class="btn btn-primary" href="{{ route('room-booking.edit',$row->id) }}">Edit</a>--}}
+                                        <a class="btn btn-primary" href="{{ route('room-booking.edit',$row->id) }}">Edit</a>
                                         {{--<a class="btn btn-danger" href="{{ route('room-booking.destroy',$row->id) }}">Delete</a>--}}
                                     </td>
                                 </tr>
