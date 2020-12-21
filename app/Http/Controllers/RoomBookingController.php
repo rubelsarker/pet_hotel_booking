@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\BookRoom;
 use App\Model\Payment;
 use App\Model\Room;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,17 +57,46 @@ class RoomBookingController extends Controller
             'mobile'        => $request->customer_mobile,
             'customer_id'   => Auth::user()->id,
             'room_id'       => $request->room_id
-            ];
-        //$bookRoom = BookRoom::where('room_id',$request->room_id)->get();
-
+        ];
+        $bookRoom = BookRoom::where('room_id',$request->room_id)->get();
+        $bookedDayes = [];
+        foreach ($bookRoom as $b){
+            $period = CarbonPeriod::create($b->from,$b->to);
+            foreach ($period as $date) {
+                $bookedDayes[] = $date->format('Y-m-d');
+            }
+        }
+        $available = [];
+        $allAvailable = true;
+        $message = '';
+        $last = '';
+        $period = CarbonPeriod::create($request->from,$request->to);
+        foreach ($period as $key => $date) {
+            if($key==0){
+                $message = $date->format('Y-m-d').' to ';
+            }
+            $status = 'Available';
+            if(in_array($date->format('Y-m-d'),$bookedDayes )){
+                $status = 'Booked';
+                $allAvailable = false;
+                $last = $date->format('Y-m-d');
+            }
+            $available[$date->format('Y-m-d')] = $status;
+        }
+        $message .= $last;
         $now = strtotime($request->to);
         $your_date = strtotime($request->from);
         $datediff = $now - $your_date;
         $day = round($datediff / (60 * 60 * 24));
         $room = Room::findOrFail( $request->room_id);
         $fare =  $day * $room->fare;
-        return view('room_booking.payment',compact('data','fare'));
+        if($allAvailable){
+            return view('room_booking.payment',compact('data','fare','available'));
+        } else {
+            return back()->with('warning','Room is not available at '.$message);
+        }
     }
+
     public function payment(Request $request){
         $request->validate([
             'card_number'     => 'required',
@@ -128,20 +158,34 @@ class RoomBookingController extends Controller
         $request->validate([
             'to'          => 'required'
         ]);
-        BookRoom::where('id',$id)->update([
-            'to' => $request->to,
-        ]);
-        $now = strtotime($request->to);
-        $your_date = strtotime($row->to);
-        $datediff = $now - $your_date;
-        $dayIncrease = round($datediff / (60 * 60 * 24));
-        $increaseFare = $row->room->fare;
-        $payment = Payment::where('booking_id',$id)->first();
-        Payment::where('booking_id',$id)->update([
-            'Amount' => ( $dayIncrease *  $increaseFare) + $payment->Amount
-        ]);
-        return redirect()->route('room-booking.index')
-            ->with('success','Booking updated  successfully');
+        $bookRoom = BookRoom::where('room_id',$row->room_id)->get();
+        $bookedDayes = [];
+        foreach ($bookRoom as $b){
+            $period = CarbonPeriod::create($b->from,$b->to);
+            foreach ($period as $date) {
+                $bookedDayes[] = $date->format('Y-m-d');
+            }
+        }
+        if(in_array($request->to,$bookedDayes )){
+            return back()->with('warning','Room is not available');
+        }
+        else{
+            BookRoom::where('id',$id)->update([
+                'to' => $request->to,
+            ]);
+            $now = strtotime($request->to);
+            $your_date = strtotime($row->to);
+            $datediff = $now - $your_date;
+            $dayIncrease = round($datediff / (60 * 60 * 24));
+            $increaseFare = $row->room->fare;
+            $payment = Payment::where('booking_id',$id)->first();
+            Payment::where('booking_id',$id)->update([
+                'Amount' => ( $dayIncrease *  $increaseFare) + $payment->Amount
+            ]);
+            return redirect()->route('room-booking.index')
+                ->with('success','Booking updated  successfully');
+        }
+
     }
 
     /**
